@@ -1,6 +1,4 @@
-/** {
-  outline: 1px solid red !important;
-}*/
+/* main style sheet for pizza website */
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -33,6 +31,10 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
+  transform: translateZ(0);
+  transform translate3d(0,0,0);
+  backface-visibility: hidden;
+  /* hardware-accelerate graphics-intensive CSS features by offloading them to the GPU  for better rendering performance */
 }
 
 .randomPizzaContainer {

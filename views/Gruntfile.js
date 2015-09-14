@@ -11,20 +11,10 @@ var mozjpeg = require('imagemin-mozjpeg');
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: ['lib/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    },
     uglify: {
       dist: {
         src: 'js/main.js',
-        dest: 'js/main.min.js'
+        dest: 'dest/js/main.min.js'
       }
     },
     jshint: {
@@ -47,11 +37,8 @@ var mozjpeg = require('imagemin-mozjpeg');
         src: 'Gruntfile.js'
       },
       lib_test: {
-        src: ['lib/**/*.js', 'test/**/*.js']
+        src: 'js/*.js',
       }
-    },
-    qunit: {
-      files: ['test/**/*.html']
     },
     watch: {
       gruntfile: {
@@ -66,22 +53,22 @@ var mozjpeg = require('imagemin-mozjpeg');
     responsive_images: {
       myTask: {
         options: {
-          sizes: [{
+          sizes: [
+          {
+            width: 100,
+          },{
             width: 293,
-            quality: 100
           },{
             width: 360,
-            quality:100
           },{
             width: 720,
-            quality: 100
           }]
         },
         files:[{
           expand: true,
-          src:['**/*.{png,jpg,gif}'],
+          src:['**/*.jpg'],
           cwd:'images/',
-          custom_dest: 'images/{%= width %}/'
+          dest: 'dest/images/'
         }]
       }
     },
@@ -94,9 +81,9 @@ var mozjpeg = require('imagemin-mozjpeg');
         },
         files: [{
           expand: true,                  // Enable dynamic expansion
-          cwd: 'images/',                   // Src matches are relative to this path
-          src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
-          dest: 'images/build/'                  // Destination path prefix
+          cwd: 'dest/images/',                   // Src matches are relative to this path
+          src: ['*.jpg'],   // Actual patterns to match
+          dest: 'dest/images/build/'                  // Destination path prefix
         }]
       },
     },
@@ -106,7 +93,7 @@ var mozjpeg = require('imagemin-mozjpeg');
           expand: true,
           cwd: 'css',
           src: ['*.css', '!*.min.css'],
-          dest: 'css',
+          dest: 'dest/css',
           ext: '.min.css'
         }]
       }
@@ -114,9 +101,7 @@ var mozjpeg = require('imagemin-mozjpeg');
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-responsive-images');
@@ -124,6 +109,6 @@ var mozjpeg = require('imagemin-mozjpeg');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // Default task.
-  grunt.registerTask('default', ['cssmin','jshint', 'qunit', 'concat', 'uglify','responsive_images', 'imagemin']);
+  grunt.registerTask('default', ['cssmin','jshint', 'watch','uglify','responsive_images', 'imagemin']);
 
 };
