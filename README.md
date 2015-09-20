@@ -41,12 +41,14 @@ Pizza Website Optimization
 		5. Use document.getElementById() instead of query selector()(line 503,507,511,538,606)
 		5. When define for loop: replace hard entered number to variable name to reduce hard code(line 519,540,598)
 		6. Optimize functions by move variable definition out of for loop(line 597) and do the calculation for a fixed number before pass into the loop; (line 573)
-		7. replace style.left by style.transform.translateX() for better performance(line 575)
+		7. replace style.left by style.transform.translateX() for better performance(line 575) and change the location item according to current position
 		8. At the event DOMContentLoaded, generates number of pizzas based on window.innerHeight to help with performance.(line 596)
 
 	C. CSS:
 
-		Hardware-accelerate graphics-intensive CSS features by offloading them to the GPU for better rendering performance on .mover(line 30)
+		1.Hardware-accelerate graphics-intensive CSS features by offloading them to the GPU for better rendering performance on .mover(line 30)
+		2. Width of col set to inhert to fix pizza icon start with different size
+
 
 	D. Grunt-work-flow:
 
@@ -66,8 +68,10 @@ Instructions
 
 Version
 --------------------------
-v2.0 2015.09.14
-Notes: pizza site modified based on comments
+v3.0 2015.09.20
+Notes: 1.pizza menu icon start at same size
+	   2.bug with start background only have one col of pizza fixed
+	   3.bug with background pizza shift only happen to half of the screen fixed
 
 Author
 --------------------------

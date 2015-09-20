@@ -572,8 +572,8 @@ function updatePositions() {
 	var items = document.getElementsByClassName("mover"); //change queryselectAll to getElementsByClassName for better perfomance
 	var scroll = document.body.scrollTop / 1250; //move calculation of fixed number outside of loop to avoid repeatly create phase inside for loop
 	for (var i = 0; i < items.length; i++) {
-		items[i].style.transform = "translateX(" + (items[i].basicLeft + 100 * Math.sin(
-			scroll + (i % 5))) + "px)"; //change style.left to translateX for better performance
+		items[i].style.transform = "translateX(" + (items[i].basicLeft -screen.width/2 + 100 * Math.sin(
+			scroll + (i % 5))) + "px)"; //change style.left to translateX and add shift the basepoint of each pizza half of screen back
 	}
 	window.performance.mark("mark_end_frame");
 	window.performance.measure("measure_frame_duration", "mark_start_frame",
@@ -605,4 +605,5 @@ document.addEventListener('DOMContentLoaded', function() {
 		elem.style.top = (Math.floor(i / cols) * s) + 'px';
 		document.getElementById("movingPizzas1").appendChild(elem); //change queryselcet to getElementById
 	}
+	updatePositions();
 });
